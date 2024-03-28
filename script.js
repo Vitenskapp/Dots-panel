@@ -3,6 +3,7 @@ let dotElement = document.querySelector('.dot');
 let dotContainer = document.querySelector('.dot-container');
 let doButton = document.querySelector(".redo");
 let undoButton = document.querySelector(".undo");
+let undoAll = document.querySelector(".undoAll");
 
 let number = document.querySelector('.number');
 
@@ -43,6 +44,13 @@ const redoDot = () => {
   }
 }
 
+const handleUndoAll = () => {
+  dotList = [];
+  lastDotList = [];
+  refreshDot();
+  handleNumber();
+}
+
 const refreshDot = () => {
   let dot = "";
   dotList.map((el) => {
@@ -56,7 +64,7 @@ main.addEventListener('click', (evt) => {
   let clientX = evt.clientX;
   let clientY = evt.clientY;
 
-  if(evt.target !== doButton && evt.target !== undoButton){
+  if(evt.target !== doButton && evt.target !== undoButton && evt.target !== number && evt.target !== undoAll){
     createDot(clientX, clientY);
   }
   
@@ -69,4 +77,8 @@ undoButton.addEventListener('click', () => {
 
 doButton.addEventListener('click', () => {
   redoDot();
+})
+
+undoAll.addEventListener('click', () => {
+  handleUndoAll();
 })
