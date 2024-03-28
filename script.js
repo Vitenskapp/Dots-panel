@@ -4,9 +4,14 @@ let dotContainer = document.querySelector('.dot-container');
 let doButton = document.querySelector(".redo");
 let undoButton = document.querySelector(".undo");
 
+let number = document.querySelector('.number');
+
 let dotList = [];
 let lastDotList = [];
 
+const handleNumber  = () => {
+  number.innerHTML = dotList.length;
+}
 
 const createDot = (clientX, clientY) => {
   dotList.push({
@@ -15,12 +20,14 @@ const createDot = (clientX, clientY) => {
     y: clientY
   })
   refreshDot(dotList)
+  handleNumber()
 }
 
 const undoDot = () => {
   if(dotList.length > 0){ lastDotList.push(dotList[dotList.length - 1]);
     dotList.pop()
     refreshDot()
+    handleNumber()
   }
   
   return;
@@ -32,6 +39,7 @@ const redoDot = () => {
     dotList.push(lastDotList[lastDotList.length - 1])
     lastDotList.pop()
     refreshDot()
+    handleNumber()
   }
 }
 
